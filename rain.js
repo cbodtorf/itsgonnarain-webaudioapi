@@ -1,7 +1,9 @@
 /***************************
 * Lets instantiate our audio context
 ***************************/
-let audioCtx = new AudioContext();
+let audioCtx = new AudioContext()
+let play = document.getElementById('play')
+let stop = document.getElementById('stop')
 
 
 /***************************
@@ -35,6 +37,9 @@ function startLoop(audioBuffer, pan = 0, rate = 1) {
   ***************************/
 
   srcNode.start(0, srcNode.loopStart)
+  stop.addEventListener("click", function(){
+    srcNode.stop()
+  })
 }
 
 
@@ -55,8 +60,10 @@ fetch('jackals.wav')
     * --- *
     * Here we are using two audio loops.
     ***************************/
-    startLoop(audioBuffer, -1)
-    startLoop(audioBuffer, 1, 1.002)
+    play.addEventListener("click", function(){
+      startLoop(audioBuffer, -1)
+      startLoop(audioBuffer, 1, 1.002)
+    })
   })
   .catch(err => console.log(err))
 
